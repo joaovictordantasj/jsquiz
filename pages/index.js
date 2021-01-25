@@ -1,10 +1,11 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import Head from 'next/head';
 import db from '../db.json';
-import Widget from '../src/components/Widget'
-import QuizLogo from '../src/components/QuizLogo'
-import QuizBackground from '../src/components/QuizBackground'
-import Footer from '../src/components/Footer'
-import GitHubCorner from '../src/components/GitHubCorner'
+import Widget from '../src/components/Widget';
+import QuizLogo from '../src/components/QuizLogo';
+import QuizBackground from '../src/components/QuizBackground';
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GitHubCorner';
 
 
 // const Title = styled.h1`
@@ -38,6 +39,7 @@ export default function Home() {
         <Widget>
           <Widget.Header>
             <h1>{db.title}</h1>
+            <meta name="og:image" content={db.bg}/>
           </Widget.Header>
           <Widget.Content>
             <p>{db.description}</p>
