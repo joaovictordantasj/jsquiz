@@ -1,12 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+
 import db from '../db.json';
 import Widget from '../src/components/Widget';
 import QuizLogo from '../src/components/QuizLogo';
 import QuizBackground from '../src/components/QuizBackground';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
-
 
 // const Title = styled.h1`
 //   font-size: 50px;
@@ -32,24 +34,47 @@ export const QuizContainer = styled.div`
 `;
 
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = React.useState('');
+
   return (
     <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>JavaScript Quiz</title>
+        <meta name="og:image" content={db.bg} />
+      </Head>
       <QuizContainer>
         <QuizLogo />
         <Widget>
           <Widget.Header>
             <h1>{db.title}</h1>
-            <meta name="og:image" content={db.bg}/>
           </Widget.Header>
           <Widget.Content>
-            <p>{db.description}</p>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              router.push(`/quiz?name=${name}`);
+              console.log('Fazendo uma submissão no react');
+              // Router manda para a próxima página
+            }}
+            >
+              <input
+                onChange={function (infosDoEvento) {
+                  console.log(infosDoEvento.target.value);
+                  // State
+                  // name = infosDoEvento.target.value;
+                  setName(infosDoEvento.target.value);
+                }}
+                placeholder="Digite seu nome aqui.."
+              />
+              <button type="submit" disabled={name.length === 0}>
+                Jogar
+              </button>
+            </form>
           </Widget.Content>
         </Widget>
-
         <Widget>
           <Widget.Content>
             <h1>Quizes da Galera</h1>
-
             <p>lorem ipsum dolor sit amet...</p>
           </Widget.Content>
         </Widget>
