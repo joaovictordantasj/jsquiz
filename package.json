@@ -12,8 +12,11 @@
     "next": "latest",
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
+    "react-confetti": "^6.0.0",
     "react-dom": "^16.8.0",
     "react-is": "^16.8.0",
+    "react-use": "^15.3.8",
+    "react-use-window-size": "^1.0.1",
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
