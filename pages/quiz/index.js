@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Lottie } from '@crello/react-lottie';
+import { useRouter } from 'next/router';
 // import useWindowSize from 'react-use/lib/useWindowSize';
 // import Confetti from 'react-confetti';
 
@@ -25,17 +26,6 @@ function ResultWidget({ results }) {
       </Widget.Header>
 
       <Widget.Content>
-        {/* <p>
-          {`Você acertou
-          ${results.reduce((somatoriaAtual, resultAtual) => {
-            const isAcerto = resultAtual === true;
-            if (isAcerto) {
-              return somatoriaAtual + 1;
-            }
-            return somatoriaAtual;
-          }, 0)}
-          perguntas`}
-        </p> */}
         <p>
           {`Você acertou
           ${results.filter((x) => x).length}
@@ -94,13 +84,15 @@ function QuestionWidget({
   const questionId = `question__${questionIndex}`;
   const isCorrect = selectedAlternative === question.answer;
   const hasAlternativeSelected = selectedAlternative !== undefined;
+  const router = useRouter();
+  const { name } = router.query;
 
   return (
     <Widget>
       <Widget.Header>
         <BackLinkArrow href="/" />
         <h3>
-          {`Pergunta ${questionIndex + 1} de ${totalQuestions}`}
+          {`Pergunta ${questionIndex + 1} de ${totalQuestions} para ${name}`}
         </h3>
       </Widget.Header>
       <img
