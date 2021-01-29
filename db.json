@@ -41,5 +41,10 @@
             "success": "#4CAF50"
         },
         "borderRadius": "4px"
-    }
+    },
+    "gifs" : [
+        {
+            "loading": "https://media.giphy.com/media/hsgHJfQESdAqRGnOY6/giphy.gif"
+        }
+    ]
 }

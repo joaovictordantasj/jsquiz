@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Lottie } from '@crello/react-lottie';
 // import useWindowSize from 'react-use/lib/useWindowSize';
 // import Confetti from 'react-confetti';
+
 import db from '../../db.json';
 import Button from '../../src/components/Button';
 import Widget from '../../src/components/Widget';
@@ -10,6 +12,8 @@ import QuizContainer from '../../src/components/QuizContainer';
 import BackLinkArrow from '../../src/components/BackLinkArrow';
 import QuizBackground from '../../src/components/QuizBackground';
 import AlternativesForm from '../../src/components/AlternativesForm';
+
+import loadingAnimation from '../../src/assets/loading.json';
 
 function ResultWidget({ results }) {
   // const { width, height } = useWindowSize();
@@ -66,8 +70,13 @@ function LoadingWidget() {
         Carregando...
       </Widget.Header>
 
-      <Widget.Content>
-        [Desafio do Loading]
+      <Widget.Content style={{ display: 'flex', justifyContent: 'center' }}>
+        <Lottie
+          width="200px"
+          height="300px"
+          className="lottie-container basic"
+          config={{ animationData: loadingAnimation, loop: true, autoplay: true }}
+        />
       </Widget.Content>
     </Widget>
   );
@@ -184,7 +193,7 @@ export default function QuizPage() {
   React.useEffect(() => {
     setTimeout(() => {
       setScreenState(screenStates.QUIZ);
-    }, 1 * 1000);
+    }, 3 * 1000);
   }, []);
 
   function handleSubmitQuiz() {
