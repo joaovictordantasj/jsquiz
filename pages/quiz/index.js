@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Lottie } from '@crello/react-lottie';
+import Confetti from 'react-confetti';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-// import useWindowSize from 'react-use/lib/useWindowSize';
-// import Confetti from 'react-confetti';
+import { Lottie } from '@crello/react-lottie';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 import db from '../../db.json';
 import Button from '../../src/components/Button';
@@ -17,45 +19,103 @@ import AlternativesForm from '../../src/components/AlternativesForm';
 import loadingAnimation from '../../src/assets/loading.json';
 
 function ResultWidget({ results }) {
-  // const { width, height } = useWindowSize();
+  const { width, height } = useWindowSize();
+  const questoesAcertadas = results.filter((x) => x).length;
+  const qtdQuestoes = db.questions.length;
+  const gif = db.gifs;
+  const router = useRouter();
+  const { name } = router.query;
 
   return (
     <Widget>
       <Widget.Header>
         Tela de Resultado
       </Widget.Header>
-
+      {questoesAcertadas === qtdQuestoes && (
+        <>
+          <img
+            alt="Descrição"
+            style={{
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
+            }}
+            src={gif.congratulations}
+          />
+          <Widget.Content>
+            <h3>{`Parabéns ${name}! Você ACERTOU TODAS as perguntas`}</h3>
+          </Widget.Content>
+          <Confetti
+            recycle={false}
+            numberOfPieces={500}
+            width={width}
+            height={height}
+          />
+        </>
+      )}
+      {(questoesAcertadas < qtdQuestoes) && (questoesAcertadas > 0) && (
+        <>
+          <img
+            alt="Descrição"
+            style={{
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
+            }}
+            src={gif.almost}
+          />
+          <Widget.Content>
+            <h3>{`OPS ${name}! você QUASE acertou todas as perguntas.`}</h3>
+          </Widget.Content>
+        </>
+      )}
+      {questoesAcertadas === 0 && (
+        <>
+          <img
+            alt="Descrição"
+            style={{
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
+            }}
+            src={gif.fail}
+          />
+          <Widget.Content>
+            <h3>{`Vixe ${name}! Você ERROU TODAS as perguntas.`}</h3>
+          </Widget.Content>
+        </>
+      )}
       <Widget.Content>
         <p>
-          {`Você acertou
-          ${results.filter((x) => x).length}
-          perguntas`}
+          {`Você acertou ${questoesAcertadas} de ${qtdQuestoes} perguntas.`}
         </p>
         <ul>
           {results.map((result, index) => (
             <li key={`result__${result}`}>
-              #
-              {index + 1}
-              : Resultado:
-              {result === true
-                ? 'Acertou'
-                : 'Errou'}
+              {`${index + 1}ª pergunta: ${result === true ? 'Acertou' : 'Errou'}`}
             </li>
           ))}
         </ul>
+        <Link href="/">
+          <Button href="/">Reiniciar o Quiz</Button>
+        </Link>
       </Widget.Content>
-
-      {/* <Confetti
-        width={width}
-        height={height}
-      /> */}
     </Widget>
   );
 }
 
 function LoadingWidget() {
   return (
-    <Widget>
+    <Widget
+      as={motion.section}
+      transition={{ delay: 0, duration: 0.5 }}
+      variants={{
+        show: { opacity: 1, y: '0' },
+        hidden: { opacity: 0, y: '100%' },
+      }}
+      initial="hidden"
+      animate="show"
+    >
       <Widget.Header>
         Carregando...
       </Widget.Header>

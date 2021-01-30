@@ -5,7 +5,9 @@
     "description": "Teste os seus conhecimentos sobre JavaScript",
     "questions": [
         {
+            
             "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
+            
             "title": "Como fazer um seletor por id via CSS?",
             "description": "Essa é pra aquecer",
             "answer": 2,
@@ -42,9 +44,9 @@
         },
         "borderRadius": "4px"
     },
-    "gifs" : [
-        {
-            "loading": "https://media.giphy.com/media/hsgHJfQESdAqRGnOY6/giphy.gif"
-        }
-    ]
+    "gifs" : {
+        "congratulations": "https://media.giphy.com/media/CmbOLk68Y8WJ78hiSd/giphy.gif",
+        "almost": "https://media.giphy.com/media/SZQBPO4NqHkh6wmdXk/giphy.gif",
+        "fail": "https://media.giphy.com/media/BY8ORoRpnJDXeBNwxg/giphy.gif"
+    }
 }
