@@ -80,12 +80,25 @@ export default function Home() {
 
                 return (
                   <li key={linkExerno}>
-                    <Widget.Topic
-                      as={Link}
-                      href={`/quiz/${projectName}___${githubUser}`}
-                    >
-                      {`${githubUser}/${projectName}`}
-                    </Widget.Topic>
+                    {(name.length === 0) && (
+                      <Widget.Topic
+                        as={Link}
+                        href={' '}
+                        enabedLink={name.length !== 0}
+                      >
+                        {`${githubUser}/${projectName}`}
+                      </Widget.Topic>
+                    )}
+
+                    {(name.length !== 0) && (
+                      <Widget.Topic
+                        as={Link}
+                        href={`/quiz/${projectName}___${githubUser}`}
+                        enabedLink={name.length !== 0}
+                      >
+                        {`${githubUser}/${projectName}`}
+                      </Widget.Topic>
+                    )}
                   </li>
                 );
               })}
@@ -98,3 +111,5 @@ export default function Home() {
     </QuizBackground>
   );
 }
+
+// disabled={name.length === 0}
