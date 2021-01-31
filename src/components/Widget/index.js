@@ -58,7 +58,6 @@ Widget.Topic = styled.a`
   transition: .3s;
   display: block;
   cursor: ${(props) => (props.enabedLink ? 'pointer' : 'not-allowed !important')};
-  /* pointer-events: ${(props) => (props.enabedLink ? 'initial' : 'none')}; */
   
   &:hover,
   &:focus {

@@ -195,6 +195,7 @@ function QuestionWidget({
                 htmlFor={alternativeId}
                 data-selected={isSelected}
                 data-status={isQuestionSubmited && alternativeStatus}
+                enabedLink
               >
                 <input
                   style={{ display: 'none' }}
